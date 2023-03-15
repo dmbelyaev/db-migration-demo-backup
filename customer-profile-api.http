@@ -1,0 +1,10 @@
+###
+POST localhost:8080/api/customer-profiles
+Content-Type: application/json
+
+{"email": "test_user@test.com"}
+
+
+###
+GET localhost:8080/api/customer-profiles/
+Accept: application/json

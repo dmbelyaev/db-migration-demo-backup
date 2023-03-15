@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-migration-demo-app
+spec:
+  selector:
+    matchLabels:
+      run: db-migration-demo-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: db-migration-demo-app
+    spec:
+      containers:
+        - name: db-migration-demo-app-pod
+          image: dbelyaev626/db-migration-demo-app
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://host.docker.internal:5432/local_db"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-migration-demo-app-svc
+  labels:
+    run: db-migration-demo-app
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    run: db-migration-demo-app
