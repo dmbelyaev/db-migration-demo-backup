@@ -17,13 +17,19 @@ class CustomerProfileRepositoryTest {
     private CustomerProfileRepository subject;
 
     @Test
-	void shouldPersistCustomerProfile() {
+	void shouldPersistCustomerProfileWithAddress() {
 		var id = UUID.randomUUID().toString();
+		var address = new AddressEntity()
+				.setId(UUID.randomUUID().toString())
+				.setCity("Munich")
+				.setZipCode("89000")
+				.setStreet("Milky Way 42");
 		var entity = new CustomerProfileEntity()
+				.setId(id)
 				.setFirstName("Joe")
 				.setLastName("Doe")
 				.setEmail("joe.doe@test.com")
-				.setId(id);
+				.setAddress(address);
 
 		subject.save(entity);
 

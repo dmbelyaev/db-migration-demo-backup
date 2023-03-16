@@ -14,9 +14,17 @@ spec:
     spec:
       containers:
         - name: db-migration-demo-app-pod
-          image: dbelyaev626/db-migration-demo-app
+          image: dbelyaev626/db-migration-demo-app:1.0
           ports:
             - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            periodSeconds: 5
+            failureThreshold: 3
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://host.docker.internal:5432/local_db"

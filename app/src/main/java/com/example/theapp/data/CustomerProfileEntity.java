@@ -1,11 +1,11 @@
 package com.example.theapp.data;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToOne;
 
 @Entity(name = "CustomerProfile")
-@Table(name = "customer_profile")
 public class CustomerProfileEntity {
 
     @Id
@@ -16,6 +16,9 @@ public class CustomerProfileEntity {
     private String lastName;
 
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private AddressEntity address;
 
     public String getId() {
         return id;
@@ -50,6 +53,15 @@ public class CustomerProfileEntity {
 
     public CustomerProfileEntity setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public AddressEntity getAddress() {
+        return address;
+    }
+
+    public CustomerProfileEntity setAddress(AddressEntity address) {
+        this.address = address;
         return this;
     }
 }

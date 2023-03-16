@@ -7,8 +7,11 @@ public class DBMigrationApp {
     private static final Logger LOGGER = LoggerFactory.getLogger(DBMigrationApp.class);
 
     public static void main(String[] args) {
+        var start = System.currentTimeMillis();
+        var migrateResult = new Migrator(EnvDataSourceProvider.getDataSource()).migrateToLatest();
         LOGGER.info(
-                "Executed {} migrations",
-                new Migrator(EnvDataSourceProvider.getDataSource()).migrateToLatest().migrationsExecuted);
+                "Executed {} migrations in {}ms.",
+                migrateResult.migrationsExecuted,
+                System.currentTimeMillis() - start);
     }
 }

@@ -1,1 +1,1 @@
-kubectl port-forward service/db-migration-app 8080:8080
+kubectl port-forward service/db-migration-demo-app-svc 8080:8080

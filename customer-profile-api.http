@@ -8,3 +8,8 @@ Content-Type: application/json
 ###
 GET localhost:8080/api/customer-profiles/
 Accept: application/json
+
+
+###
+GET localhost:8080/actuator/health
+Accept: application/json
